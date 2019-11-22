@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>BDP</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/everest.css') }}">
+	<script src="{{url_for('static', filename='everest_2.js')}}"></script>
+	<!-- <script src="{{url_for('static', filename='everest.js')}}"></script> -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	
+</head>
+<body>
+<form name="BDPform" method="post" action="/bdp_masterdata" enctype="multipart/form-data" >
+<div id="container">
+  <div id="top">  
+  </div>
+  <div id="navcontainer">
+    <ul id="navlist">
+      <h2><span style="font-weight:bold; color:#b29b35;">BDP</span></h2>
+    </ul>
+  </div>
+  <div id="content">
+	<table>
+		<tr>
+			<td>
+				GROUP CODE
+			</td>
+			<td>
+				SBU CODE
+			</td>
+			<td>
+				CONO
+			</td>
+			<td>
+				ORIGIN SHIP POINT
+			</td>
+			<td>
+				DEST PORT DISCHARGE
+			</td>
+			<td>
+				PRODS
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="text" name="GROUPCODE"/>
+			</td>
+			<td>
+				<input type="text" name="SBUCODE"/>
+			</td>
+			<td>
+				<input type="text" name="CONO"/>
+			</td>
+			<td>
+				<input type="text" name="ORIGINSHIPPOINT"/>
+			</td>
+			<td>
+				<input type="text" name="DESTPORTDISCHARGE"/>
+			</td>
+			<td>
+				<input type="text" name="PRODID"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				SHIPPER
+			</td>
+			<td>
+				CONSIGNEE
+			</td>
+			<td>
+				CONSIGNEE CODE
+			</td>
+			<td>
+				SOLD TO PARTY
+			</td>
+			<td>
+				SOLD TO PARTY CODE
+			</td>
+			<td>
+				SHIP TO PARTY
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="text" name="SHIPPER"/>
+			</td>
+			<td>
+				<input type="text" name="CONSIGNEE"/>
+			</td>
+			<td>
+				<input type="text" name="CONSIGNEECODE"/>
+			</td>
+			<td>
+				<input type="text" name="SOLDTOPARTY"/>
+			</td>
+			<td>
+				<input type="text" name="SOLDTOPARTYCODE"/>
+			</td>
+			<td>
+				<input type="text" name="SHIPTOPARTY"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				SHIP TO PARTY CODE
+			</td>
+			<td>
+				NOTIFY PARTY
+			</td>
+			<td>
+				NOTIFY PARTY CODE
+			</td>
+			<td>
+				MOT CD
+			</td>
+			<td>
+				MOVE TYP CD
+			</td>
+			<td>
+				CARGO TYP
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="text" name="SHIPTOPARTYCODE"/>
+			</td>
+			<td>
+				<input type="text" name="NOTIFYPARTY"/>
+			</td>
+			<td>
+				<input type="text" name="NOTIFYPARTYCODE"/>
+			</td>
+			<td>
+				<input type="text" name="MOTCD"/>
+			</td>
+			<td>
+				<input type="text" name="MOVETYPCD"/>
+			</td>
+			<td>
+				<input type="text" name="CARGOTYP"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				PLACE OF RCPT UNLOC CD
+			</td>
+			<td>
+				PORT OF DEPTR UNLOC CD
+			</td>
+			<td>
+				PORT OF ARRVL UNLOC CD
+			</td>
+			<td>
+				PLACE OF DEL UNLOC CD
+			</td>
+			<td>
+				BDP REP
+			</td>
+			<td>
+				HZRDOUS MATERIAL IND
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="text" name="PLACEOFRCPTUNLOCCD"/>
+			</td>
+			<td>
+				<input type="text" name="PORTOFDEPTRUNLOCCD"/>
+			</td>
+			<td>
+				<input type="text" name="PORTOFARRVLUNLOCCD"/>
+			</td>
+			<td>
+				<input type="text" name="PLACEOFDELUNLOCCD"/>
+			</td>
+			<td>
+				<input type="text" name="BDPREP"/>
+			</td>
+			<td>
+				<input type="text" name="HZRDOUSMATERIALIND"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				TRANS PCKG CT
+			</td>
+			<td>
+				CNTNR TYPS
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="text" name="TRANSPCKGCT"/>
+			</td>
+			<td>
+				<input type="text" name="CNTNRTYPS"/>
+			</td>
+		</tr>
+	</table>
+	<hr/>	
+    <input id="submit_button" type="submit" value="Predict" onclick="generateSQLQuery()" /> <!-- $('#loading').show(); -->
+	<input type="hidden" id="hdSQLQuery" name="hdSQLQuery" value="">
+	<input type="hidden" id="hdSQLQuery2" name="hdSQLQuery2" value="">
+	<input type="hidden" id="hdSQLQuery2_1" name="hdSQLQuery2_1" value="">
+	<input type="hidden" id="hdSQLQuery3" name="hdSQLQuery3" value="">
+	<!-- result Summary -->
+	
+	<table>
+		<tr>
+			<td>
+				<h2>CONSIGNEE:</h2>
+			</td>
+			<td>
+				<h2>NOTIFY PARTY:</h2>
+			</td>
+			<td>
+				<h2>CONTAINER TYPE:</h2>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+				{% for table in actual_table %}
+					{{ table|safe }}
+				{% endfor %}
+			</td>
+			<td valign="top" style="border-left: 2px dotted silver">
+				{% for table in actual_table2 %}
+					{{ table|safe }}
+				{% endfor %}
+			</td>
+			<td valign="top" style="border-left: 2px dotted silver">
+				{% for table in actual_table3 %}
+					{{ table|safe }}
+				{% endfor %}
+			</td>
+		</tr>
+	</table>
+  </div>
+    
+  <!--<div id="footer">
+    &nbsp;
+  </div>-->
+</div>
+</form>
+<script>
+
+function generateSQLQuery() {
+	//var SQLQuery = "SELECT DISTINCT CONSIGNEE, NOTIFY_PARTY, CNTNR_TYPS FROM Non_empty_data_v2 WHERE "
+	var SQLQuery_Consignee = "SELECT DISTINCT CONSIGNEE FROM Non_empty_data_v2_bin WHERE "
+	var SQLQuery_NotifyParty = "SELECT DISTINCT NOTIFY_PARTY FROM Non_empty_data_v2_bin WHERE "
+    var SQLQuery_NotifyParty_2 = "SELECT DISTINCT NOTIFY_PARTY FROM Non_empty_data_v2_bin WHERE "
+	var SQLQuery_ContainerType = "SELECT DISTINCT CNTNR_TYPS FROM Non_empty_data_v2_bin WHERE "
+	// CONSIGNEE
+	if(document.forms["BDPform"]["PRODID"].value != ""){
+		SQLQuery_Consignee = SQLQuery_Consignee + "PRODS = '" + document.forms["BDPform"]["PRODID"].value.trim() + "' AND "
+		SQLQuery_ContainerType = SQLQuery_ContainerType + "PRODS = '" + document.forms["BDPform"]["PRODID"].value.trim() + "' AND "
+		SQLQuery_NotifyParty = SQLQuery_NotifyParty + "PRODS = '" + document.forms["BDPform"]["PRODID"].value.trim() + "' AND "
+		SQLQuery_NotifyParty_2 = SQLQuery_NotifyParty_2 + "PRODS = '" + document.forms["BDPform"]["PRODID"].value.trim() + "' AND "
+		}
+		
+	if(document.forms["BDPform"]["BDPREP"].value != "")
+		SQLQuery_Consignee = SQLQuery_Consignee + "BDP_REP = '" + document.forms["BDPform"]["BDPREP"].value.trim() + "' AND "
+		
+	if(document.forms["BDPform"]["DESTPORTDISCHARGE"].value != "")
+		SQLQuery_Consignee = SQLQuery_Consignee + "DEST_PORT_DISCHARGE = '" + document.forms["BDPform"]["DESTPORTDISCHARGE"].value.trim() + "' AND "
+	//------------------------
+	
+	// NOTIFY PARTY
+	
+	if(document.forms["BDPform"]["PLACEOFRCPTUNLOCCD"].value != "")
+		SQLQuery_NotifyParty = SQLQuery_NotifyParty + "PLACE_OF_RCPT_UNLOC_CD = '" + document.forms["BDPform"]["PLACEOFRCPTUNLOCCD"].value.trim() + "' AND "
+	
+	if(document.forms["BDPform"]["DESTPORTDISCHARGE"].value != "")
+		SQLQuery_NotifyParty_2 = SQLQuery_NotifyParty_2 + "DEST_PORT_DISCHARGE = '" + document.forms["BDPform"]["DESTPORTDISCHARGE"].value.trim() + "' AND "
+		
+	//------------------------
+	// Container Type
+	if(document.forms["BDPform"]["HZRDOUSMATERIALIND"].value != "")
+		SQLQuery_ContainerType = SQLQuery_ContainerType + "HZRDOUS_MATERIAL_IND = '" + document.forms["BDPform"]["HZRDOUSMATERIALIND"].value.trim() + "' AND "
+	
+	if(document.forms["BDPform"]["SOLDTOPARTY"].value != "")
+		SQLQuery_ContainerType = SQLQuery_ContainerType + "SOLD_TO_PARTY = '" + document.forms["BDPform"]["SOLDTOPARTY"].value.trim() + "' AND "
+	
+	//if(document.forms["BDPform"]["SOLDTOPARTYCODE"].value != "")
+		//SQLQuery_ContainerType = SQLQuery_ContainerType + "SOLD_TO_PARTY_CODE = '" + document.forms["BDPform"]["SOLDTOPARTYCODE"].value.trim() + "' AND "
+	
+	if(document.forms["BDPform"]["PLACEOFRCPTUNLOCCD"].value != "")
+		SQLQuery_ContainerType = SQLQuery_ContainerType + "PLACE_OF_RCPT_UNLOC_CD = '" + document.forms["BDPform"]["PLACEOFRCPTUNLOCCD"].value.trim() + "' AND "
+		
+	if(document.forms["BDPform"]["TRANSPCKGCT"].value != "")
+		SQLQuery_ContainerType = SQLQuery_ContainerType + "TRANS_PCKG_CT_MIN_VALUE >= '" + document.forms["BDPform"]["TRANSPCKGCT"].value.trim() + "' AND TRANS_PCKG_CT_MAX_VALUE < '" + document.forms["BDPform"]["TRANSPCKGCT"].value.trim() + "' AND "
+	
+	
+	/*	
+	if(document.forms["BDPform"]["GROUPCODE"].value != "")
+		SQLQuery = SQLQuery + "GROUP_CODE = '" + document.forms["BDPform"]["GROUPCODE"].value.trim() + "' AND "
+	if(document.forms["BDPform"]["SBUCODE"].value != "")
+		SQLQuery = SQLQuery + "SBU_CODE = '" + document.forms["BDPform"]["SBUCODE"].value.trim() + "' AND "
+	if(document.forms["BDPform"]["CONO"].value != "")
+		SQLQuery = SQLQuery + "CONO = '" + document.forms["BDPform"]["CONO"].value.trim() + "' AND "
+	if(document.forms["BDPform"]["ORIGINSHIPPOINT"].value != "")
+		SQLQuery = SQLQuery + "ORIGIN_SHIP_POINT = '" + document.forms["BDPform"]["ORIGINSHIPPOINT"].value.trim() + "' AND "
+	if(document.forms["BDPform"]["SHIPPER"].value != "")
+		SQLQuery = SQLQuery + "SHIPPER = '" + document.forms["BDPform"]["SHIPPER"].value.trim() + "' AND "
+	if(document.forms["BDPform"]["CONSIGNEE"].value != "")
+		SQLQuery = SQLQuery + "CONSIGNEE = '" + document.forms["BDPform"]["CONSIGNEE"].value.trim() + "' AND "
+	if(document.forms["BDPform"]["CONSIGNEECODE"].value != "")
+		SQLQuery = SQLQuery + "CONSIGNEE_CODE = '" + document.forms["BDPform"]["CONSIGNEECODE"].value.trim() + "' AND "
+	if(document.forms["BDPform"]["SHIPTOPARTY"].value != "")
+		SQLQuery = SQLQuery + "SHIP_TO_PARTY = '" + document.forms["BDPform"]["SHIPTOPARTY"].value.trim() + "' AND "
+	if(document.forms["BDPform"]["SHIPTOPARTYCODE"].value != "")
+		SQLQuery = SQLQuery + "SHIP_TO_PARTY_CODe = '" + document.forms["BDPform"]["SHIPTOPARTYCODE"].value.trim() + "' AND "
+	if(document.forms["BDPform"]["NOTIFYPARTYCODE"].value != "")
+		SQLQuery = SQLQuery + "NOTIFY_PARTY_CODE = '" + document.forms["BDPform"]["NOTIFYPARTYCODE"].value.trim() + "' AND "
+	if(document.forms["BDPform"]["MOTCD"].value != "")
+		SQLQuery = SQLQuery + "MOT_CD = '" + document.forms["BDPform"]["MOTCD"].value.trim() + "' AND "
+	if(document.forms["BDPform"]["MOVETYPCD"].value != "")
+		SQLQuery = SQLQuery + "MOVE_TYP_CD = '" + document.forms["BDPform"]["MOVETYPCD"].value.trim() + "' AND "
+	if(document.forms["BDPform"]["CARGOTYP"].value != "")
+		SQLQuery = SQLQuery + "CARGO_TYP = '" + document.forms["BDPform"]["CARGOTYP"].value.trim() + "' AND "
+	if(document.forms["BDPform"]["PORTOFDEPTRUNLOCCD"].value != "")
+		SQLQuery = SQLQuery + "PORT_OF_DEPTR_UNLOC_CD = '" + document.forms["BDPform"]["PORTOFDEPTRUNLOCCD"].value.trim() + "' AND "
+	if(document.forms["BDPform"]["PORTOFARRVLUNLOCCD"].value != "")
+		SQLQuery = SQLQuery + "PORT_OF_ARRVL_UNLOC_CD = '" + document.forms["BDPform"]["PORTOFARRVLUNLOCCD"].value.trim() + "' AND "
+	
+	if(document.forms["BDPform"]["CNTNRTYPS"].value != "")
+		SQLQuery = SQLQuery + "CNTNR_TYPS = '" + document.forms["BDPform"]["CNTNRTYPS"].value.trim() + "' AND "
+	*/
+	
+	//SQLQuery_Consignee = SQLQuery + SQLQuery_Consignee
+	SQLQuery_Consignee = SQLQuery_Consignee.substring(0, SQLQuery_Consignee.length - 5)
+	if(SQLQuery_Consignee.trim().substring(SQLQuery_Consignee.trim().length-1) == "W")
+		SQLQuery_Consignee = SQLQuery_Consignee.trim().substring(0, SQLQuery_Consignee.trim().length-1)
+	alert(SQLQuery_Consignee)
+	document.forms["BDPform"]["hdSQLQuery"].value = SQLQuery_Consignee
+    
+	SQLQuery_NotifyParty = SQLQuery_NotifyParty.substring(0, SQLQuery_NotifyParty.length - 5)
+	if(SQLQuery_NotifyParty.trim().substring(SQLQuery_NotifyParty.trim().length-1) == "W")
+		SQLQuery_NotifyParty = SQLQuery_NotifyParty.trim().substring(0, SQLQuery_NotifyParty.trim().length-1)
+	alert(SQLQuery_NotifyParty)
+	document.forms["BDPform"]["hdSQLQuery2"].value = SQLQuery_NotifyParty
+	
+	SQLQuery_NotifyParty_2 = SQLQuery_NotifyParty_2.substring(0, SQLQuery_NotifyParty_2.length - 5)
+	if(SQLQuery_NotifyParty_2.trim().substring(SQLQuery_NotifyParty_2.trim().length-1) == "W")
+		SQLQuery_NotifyParty_2 = SQLQuery_NotifyParty_2.trim().substring(0, SQLQuery_NotifyParty_2.trim().length-1)
+	alert(SQLQuery_NotifyParty_2)
+	document.forms["BDPform"]["hdSQLQuery2_1"].value = SQLQuery_NotifyParty_2
+	
+	//SQLQuery_ContainerType = SQLQuery + SQLQuery_ContainerType
+	SQLQuery_ContainerType = SQLQuery_ContainerType.substring(0, SQLQuery_ContainerType.length - 5)
+	if(SQLQuery_ContainerType.trim().substring(SQLQuery_ContainerType.trim().length-1) == "W")
+		SQLQuery_ContainerType = SQLQuery_ContainerType.trim().substring(0, SQLQuery_ContainerType.trim().length-1)
+	alert(SQLQuery_ContainerType)
+	document.forms["BDPform"]["hdSQLQuery3"].value = SQLQuery_ContainerType
+}
+
+</script>
+</body>
+</html>
